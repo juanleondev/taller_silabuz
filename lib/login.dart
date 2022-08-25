@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sesion1/home.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -11,14 +12,14 @@ class LoginView extends StatelessWidget {
           children: [
             Positioned.fill(
               child: Container(
-                color: Colors.red,
+                color: Theme.of(context).primaryColor,
                 child: Image.asset(
                   'assets/silabuz_login_image.png',
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            Align(
+            const Align(
                 alignment: Alignment.bottomCenter,
                 child: SizedBox(height: 500, child: FormComponent())),
           ],
@@ -28,8 +29,15 @@ class LoginView extends StatelessWidget {
   }
 }
 
-class FormComponent extends StatelessWidget {
+class FormComponent extends StatefulWidget {
   const FormComponent({Key? key}) : super(key: key);
+
+  @override
+  State<FormComponent> createState() => _FormComponentState();
+}
+
+class _FormComponentState extends State<FormComponent> {
+  TextEditingController emailTEC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,50 +48,59 @@ class FormComponent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text(
+          const Text(
             'Sign in',
             style: TextStyle(fontSize: 24),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           TextField(
-            decoration: InputDecoration(hintText: 'Email'),
+            controller: emailTEC,
+            decoration: const InputDecoration(hintText: 'Email'),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          TextField(
+          const TextField(
             decoration: InputDecoration(hintText: 'Password'),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Center(
             child: SizedBox(
                 width: 335,
                 height: 40,
-                child:
-                    ElevatedButton(onPressed: () {}, child: Text('Sign in'))),
+                child: ElevatedButton(
+                    onPressed: () {
+                      if (emailTEC.text == '') {
+                        print('No se puede acceder');
+                      } else {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => HomeView()));
+                      }
+                    },
+                    child: const Text('Sign in'))),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          TextButton(onPressed: () {}, child: Text('Forgot password?')),
-          SizedBox(
+          TextButton(onPressed: () {}, child: const Text('Forgot password?')),
+          const SizedBox(
             height: 50,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Dont have an account'),
-              TextButton(onPressed: () {}, child: Text('Sign up')),
+              const Text('Dont have an account'),
+              TextButton(onPressed: () {}, child: const Text('Sign up')),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
         ],
