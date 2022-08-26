@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         builder: DevicePreview.appBuilder,
         title: 'Flutter Demo',
         theme: ThemeData(
-            primarySwatch: Colors.green,
+            primarySwatch: Colors.yellow,
             elevatedButtonTheme: ElevatedButtonThemeData(
                 style: ElevatedButton.styleFrom(elevation: 0))),
         home: const SplashScreenView());

@@ -75,16 +75,9 @@ class _FormComponentState extends State<FormComponent> {
             child: SizedBox(
                 width: 335,
                 height: 40,
-                child: ElevatedButton(
-                    onPressed: () {
-                      if (emailTEC.text == '') {
-                        print('No se puede acceder');
-                      } else {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => HomeView()));
-                      }
-                    },
-                    child: const Text('Sign in'))),
+                child: Theme(
+                    data: ThemeData(primarySwatch: Colors.red),
+                    child: ButtonLogin())),
           ),
           const SizedBox(
             height: 20,
@@ -106,5 +99,25 @@ class _FormComponentState extends State<FormComponent> {
         ],
       ),
     );
+  }
+}
+
+class ButtonLogin extends StatelessWidget {
+  const ButtonLogin({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        style:
+            ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
+        onPressed: () {
+          // if (emailTEC.text == '') {
+          //   print('No se puede acceder');
+          // } else {
+          //   Navigator.push(context,
+          //       MaterialPageRoute(builder: (_) => HomeView()));
+          // }
+        },
+        child: const Text('Sign in'));
   }
 }
