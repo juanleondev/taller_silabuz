@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sesion1/login.dart';
+import 'package:sesion1/login_view2.dart';
 
 class SplashScreenView extends StatefulWidget {
   const SplashScreenView({super.key});
@@ -17,7 +18,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
 
       await Future.delayed(Duration(seconds: 2));
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => LoginView()));
+          context, MaterialPageRoute(builder: (_) => LoginView2()));
     });
     super.initState();
   }
