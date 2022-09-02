@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sesion1/login.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:sesion1/splash_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:sesion1/user_provider.dart';
 
 void main() {
   runApp(
@@ -18,16 +20,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-            primarySwatch: Colors.blue,
-            elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(elevation: 0))),
-        home: const SplashScreenView());
+    return ChangeNotifierProvider(
+      create: (_) =>
+          UserProvider(name: 'Anonimo', address: 'Direccion anonima'),
+      child: MaterialApp(
+          useInheritedMediaQuery: true,
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+              primarySwatch: Colors.blue,
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ElevatedButton.styleFrom(elevation: 0))),
+          home: const SplashScreenView()),
+    );
   }
 }
 

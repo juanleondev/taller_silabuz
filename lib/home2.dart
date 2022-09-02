@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sesion1/edit_profile.dart';
+import 'package:sesion1/user_provider.dart';
 
 class Home2 extends StatefulWidget {
   const Home2({super.key});
@@ -27,9 +30,7 @@ class _Home2State extends State<Home2> {
           Container(
             color: Colors.blue,
           ),
-          Container(
-            color: Colors.blue,
-          ),
+          Menu()
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -62,6 +63,41 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.red,
+      child: Column(
+        children: [
+          Text(context.read<UserProvider>().name ?? 'Valor nulo'),
+          Text(context.read<UserProvider>().address ?? 'Valor nulo'),
+        ],
+      ),
+    );
+  }
+}
+
+class Menu extends StatelessWidget {
+  const Menu({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.orange,
+      child: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              width: 100,
+              height: 100,
+              child: FlutterLogo(),
+            ),
+            Text(context.watch<UserProvider>().name ?? ''),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => EditProfile()));
+                },
+                child: Text('Editar Perfil')),
+          ],
+        ),
+      ),
     );
   }
 }
