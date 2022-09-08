@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sesion1/edit_profile.dart';
+import 'package:sesion1/login.dart';
+import 'package:sesion1/login_view2.dart';
 import 'package:sesion1/user_provider.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Home2 extends StatefulWidget {
   const Home2({super.key});
@@ -95,6 +98,14 @@ class Menu extends StatelessWidget {
                       MaterialPageRoute(builder: (_) => EditProfile()));
                 },
                 child: Text('Editar Perfil')),
+            ElevatedButton(
+                onPressed: () async {
+                  final storage = FlutterSecureStorage();
+                  await storage.delete(key: '__token__');
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => LoginView2()));
+                },
+                child: Text('log out'))
           ],
         ),
       ),

@@ -8,6 +8,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:provider/provider.dart';
 import 'package:sesion1/user_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginView2 extends StatefulWidget {
   const LoginView2({super.key});
@@ -163,28 +164,47 @@ class _LoginView2State extends State<LoginView2> {
 
   Future<void> login(String user, String password) async {
     // [GET] https://api.escuelajs.co/api/v1/products
-    // final url = Uri.https('api.escuelajs.co', 'api/v1/products');
-    // final response = await http.get(
-    //   url,
-    // );
+    final url = Uri.https(
+      'api.escuelajs.co',
+      'api/v1/auth/login',
+    );
+    final response =
+        await http.post(url, body: {"email": user, "password": password});
 
-    // if (response.statusCode == 200) {
-    //   final result = jsonDecode(response.body);
-    //   print(result[0]['title']);
-    // }
+    if (response.statusCode == 201) {
+      final result = jsonDecode(response.body);
+      print(result['access_token']);
+      final storage = FlutterSecureStorage();
+      await storage.write(key: '__token__', value: result['access_token']);
 
-    // Consulta a la bd auth
-    // Nos devuelve la informacion del usuario
-    if (user == 'juan2396') {
-      String name = 'Juan Leon';
-      String address = 'Calle Margaritas 325';
-      context.read<UserProvider>().name = name;
-      context.read<UserProvider>().address = address;
+      final url2 = Uri.https(
+        'api.escuelajs.co',
+        'api/v1/auth/profile',
+      );
+      final response2 = await http.get(url2, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${result['access_token']}',
+      });
+
       Navigator.push(context, MaterialPageRoute(builder: (_) => Home2()));
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Credenciales incorrectas')));
     }
+
+    // // Consulta a la bd auth
+    // // Nos devuelve la informacion del usuario
+    // if (user == 'juan2396') {
+    //   String name = 'Juan Leon';
+    //   String address = 'Calle Margaritas 325';
+    //   context.read<UserProvider>().name = name;
+    //   context.read<UserProvider>().address = address;
+    //   Navigator.push(context, MaterialPageRoute(builder: (_) => Home2()));
+    // } else {
+    //   ScaffoldMessenger.of(context)
+    //       .showSnackBar(SnackBar(content: Text('Credenciales incorrectas')));
+    // }
   }
 }
 
