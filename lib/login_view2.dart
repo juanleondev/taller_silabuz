@@ -163,23 +163,8 @@ class _LoginView2State extends State<LoginView2> {
 
   Future<void> login(String user, String password) async {
     // [GET] https://api.escuelajs.co/api/v1/products
-    // final url = Uri.https('api.escuelajs.co', 'api/v1/products');
-    // final response = await http.get(
-    //   url,
-    // );
-
-    // if (response.statusCode == 200) {
-    //   final result = jsonDecode(response.body);
-    //   print(result[0]['title']);
-    // }
-
-    // Consulta a la bd auth
-    // Nos devuelve la informacion del usuario
-    if (user == 'juan2396') {
-      String name = 'Juan Leon';
-      String address = 'Calle Margaritas 325';
-      context.read<UserProvider>().name = name;
-      context.read<UserProvider>().address = address;
+    final isLogged = await context.read<UserProvider>().login(user, password);
+    if (isLogged) {
       Navigator.push(context, MaterialPageRoute(builder: (_) => Home2()));
     } else {
       ScaffoldMessenger.of(context)
