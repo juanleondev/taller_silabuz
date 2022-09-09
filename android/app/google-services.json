@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "90648976252",
+    "project_id": "silabuz-8954a",
+    "storage_bucket": "silabuz-8954a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90648976252:android:cc094fe5e09a162854a2f9",
+        "android_client_info": {
+          "package_name": "com.example.sesion1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90648976252-4t5bgmhep55d7ve1m4gdugk5qglce2ie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCS58OxgP00qvXRVsOcdmdtbi3aLPgu-Hw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90648976252-4t5bgmhep55d7ve1m4gdugk5qglce2ie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
